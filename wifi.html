@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wi-Fi 選択</title>
+  <title>Wi-Fi 選択ページ</title>
   <style>
     body {
       font-family: sans-serif;
       background-color: #f9f9f9;
       margin: 0;
-      padding: 10px;
+      padding: 15px;
       text-align: center;
     }
 
-    h1 {
-      font-size: 20px;
-      margin-bottom: 15px;
+    h1, h2 {
+      font-size: 18px;
+      margin: 20px 0 10px;
     }
 
     .button {
       display: block;
       width: 90%;
       max-width: 280px;
-      margin: 10px auto;
+      margin: 8px auto;
       padding: 12px;
       font-size: 16px;
       background-color: #4CAF50;
@@ -35,11 +35,43 @@
     .button:hover {
       background-color: #45a049;
     }
+
+    .ssid-block {
+      background: #fff;
+      border-radius: 8px;
+      margin: 10px auto;
+      padding: 10px;
+      max-width: 300px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .ssid-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .copy-button {
+      margin-top: 5px;
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .copy-button:active {
+      background-color: #1976D2;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Wi-Fiを選んでください</h1>
+  <h1>Wi-Fi選択</h1>
+
+  <!-- QRコード用セクション -->
+  <h2>📷 QRコード用</h2>
 
   <a class="button" href="https://drive.google.com/file/d/1z97gXIg1D6UCm7cnvXP0-_OFaWCxe9Yb/view" target="_blank">
     SSID: NSD1K-6B50-a
@@ -56,6 +88,46 @@
   <a class="button" href="https://drive.google.com/file/d/1HMrM1IrygdGDgspK7PUlpAQR_qFfwjTo/view" target="_blank">
     SSID: Doraemon-5GHz
   </a>
+
+  <!-- SSID & パスワード コピー用 -->
+  <h2>🔐 SSIDを選んでパスワードをコピー</h2>
+
+  <div class="ssid-block">
+    <div class="ssid-name">NSD1K-6B50-a</div>
+    <button class="copy-button" onclick="copyPassword('password1')">パスワードをコピー</button>
+  </div>
+
+  <div class="ssid-block">
+    <div class="ssid-name">NSD1K-6B50-g</div>
+    <button class="copy-button" onclick="copyPassword('password2')">パスワードをコピー</button>
+  </div>
+
+  <div class="ssid-block">
+    <div class="ssid-name">Doraemon-2.4GHz</div>
+    <button class="copy-button" onclick="copyPassword('password3')">パスワードをコピー</button>
+  </div>
+
+  <div class="ssid-block">
+    <div class="ssid-name">Doraemon-5GHz</div>
+    <button class="copy-button" onclick="copyPassword('password4')">パスワードをコピー</button>
+  </div>
+
+  <script>
+    function copyPassword(key) {
+      const passwords = {
+        password1: "your-password-a",
+        password2: "your-password-g",
+        password3: "doraemon24",
+        password4: "doraemon5g"
+      };
+      const text = passwords[key];
+      navigator.clipboard.writeText(text).then(() => {
+        alert("パスワードをコピーしました！");
+      }).catch(err => {
+        alert("コピーに失敗しました");
+      });
+    }
+  </script>
 
 </body>
 </html>
