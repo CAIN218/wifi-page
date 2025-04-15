@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wi-Fi選択ページ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .lock-screen, .main-content {
+      max-width: 320px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="password"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    button, .button, .copy-button {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .main-content {
+      display: none;
+    }
+
+    .button {
+      display: block;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 260px;
+      background-color: #2196F3;
+      color: white;
+      text-decoration: none;
+    }
+
+    .ssid-block {
+      background: #fff;
+      border-radius: 8px;
+      margin: 10px auto;
+      padding: 10px;
+      max-width: 300px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .ssid-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .copy-button {
+      background-color: #FF9800;
+      color: white;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ロック画面 -->
+  <div class="lock-screen" id="lock">
+    <h2>パスコードを入力してください</h2>
+    <input type="password" id="code" placeholder="4桁の数字" />
+    <br />
+    <button onclick="checkCode()">確認</button>
+  </div>
+
+  <!-- メイン画面 -->
+  <div class="main-content" id="content">
+    <h2>📷 QRコードリンク</h2>
+    <a class="button" href="https://drive.google.com/file/d/1z97gXIg1D6UCm7cnvXP0-_OFaWCxe9Yb/view" target="_blank">
+      SSID: NSD1K-6B50-a
+    </a>
+    <a class="button" href="https://drive.google.com/file/d/1FxnFR2XOXQoZVSgMUQ-ArZEoFQVh7x4R/view" target="_blank">
+      SSID: NSD1K-6B50-g
+    </a>
+    <a class="button" href="https://drive.google.com/file/d/1_0udSLp3w2A7e2YpIyMgDJ1pdqnucg8Q/view" target="_blank">
+      SSID: Doraemon-2.4GHz
+    </a>
+    <a class="button" href="https://drive.google.com/file/d/1HMrM1IrygdGDgspK7PUlpAQR_qFfwjTo/view" target="_blank">
+      SSID: Doraemon-5GHz
+    </a>
+
+    <h2 style="margin-top: 30px;">🔐 SSID & パスワードコピー</h2>
+
+    <div class="ssid-block">
+      <div class="ssid-name">NSD1K-6B50-a</div>
+      <div>パスワード: NMxYTDKsEJT6C</div>
+      <button class="copy-button" onclick="copyPassword('your-password-a')">コピー</button>
+    </div>
+
+    <div class="ssid-block">
+      <div class="ssid-name">NSD1K-6B50-g</div>
+      <div>パスワード: NMxYTDKsEJT6C</div>
+      <button class="copy-button" onclick="copyPassword('your-password-g')">コピー</button>
+    </div>
+
+    <div class="ssid-block">
+      <div class="ssid-name">Doraemon-2.4GHz</div>
+      <div>パスワード: 1231Doraemon</div>
+      <button class="copy-button" onclick="copyPassword('doraemon24')">コピー</button>
+    </div>
+
+    <div class="ssid-block">
+      <div class="ssid-name">Doraemon-5GHz</div>
+      <div>パスワード: 1231Doraemon</div>
+      <button class="copy-button" onclick="copyPassword('doraemon5g')">コピー</button>
+    </div>
+  </div>
+
+  <script>
+    function checkCode() {
+      const input = document.getElementById("code").value;
+      const correct = "0374"; // ← 任意のパスコードに変更
+
+      if (input === correct) {
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        alert("パスコードが違います");
+      }
+    }
+
+    function copyPassword(pwd) {
+      navigator.clipboard.writeText(pwd).then(() => {
+        alert("コピーしました！");
+      }).catch(() => {
+        alert("コピーに失敗しました");
+      });
+    }
+  </script>
+</body>
+</html>
