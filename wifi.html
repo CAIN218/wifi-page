@@ -1,24 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Wi-Fi 選択</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wi-Fi情報</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
-    button {
-      display: block;
-      margin: 15px auto;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+    }
+
+    .wifi-card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .wifi-card h2 {
+      font-size: 1.2rem;
+      margin: 0 0 1rem 0;
+      color: #2c3e50;
+    }
+
+    .info {
+      margin-bottom: 0.8rem;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .value {
+      word-break: break-all;
+      color: #111;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .wifi-card {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>使用したいWi-Fiを選択してください</h1>
-  <button onclick="location.href='https://drive.google.com/file/d/1z97gXIg1D6UCm7cnvXP0-_OFaWCxe9Yb/view?usp=sharing'">Wi-Fi A</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1FxnFR2XOXQoZVSgMUQ-ArZEoFQVh7x4R/view?usp=sharing'">Wi-Fi B</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1_0udSLp3w2A7e2YpIyMgDJ1pdqnucg8Q/view?usp=sharing'">Wi-Fi C</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1HMrM1IrygdGDgspK7PUlpAQR_qFfwjTo/view?usp=sharing'">Wi-Fi D</button>
+
+  <h1>Wi-Fi 接続情報</h1>
+
+  <div class="wifi-card">
+    <h2>ShibaNet_5G</h2>
+    <div class="info">
+      <span class="label">SSID：</span>
+      <span class="value">ShibaNet_5G</span>
+    </div>
+    <div class="info">
+      <span class="label">パスワード：</span>
+      <span class="value">shiba1234</span>
+    </div>
+  </div>
+
+  <div class="wifi-card">
+    <h2>ShibaNet_2G</h2>
+    <div class="info">
+      <span class="label">SSID：</span>
+      <span class="value">ShibaNet_2G</span>
+    </div>
+    <div class="info">
+      <span class="label">パスワード：</span>
+      <span class="value">shiba5678</span>
+    </div>
+  </div>
+
+  <div class="wifi-card">
+    <h2>Guest_WiFi</h2>
+    <div class="info">
+      <span class="label">SSID：</span>
+      <span class="value">Guest_WiFi</span>
+    </div>
+    <div class="info">
+      <span class="label">パスワード：</span>
+      <span class="value">welcome2025</span>
+    </div>
+  </div>
+
 </body>
 </html>
