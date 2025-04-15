@@ -3,36 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wi-Fi選択ページ</title>
+  <title>Wi-Fi選択</title>
   <style>
     body {
       font-family: sans-serif;
-      background-color: #f2f2f2;
+      background-color: #f9f9f9;
       margin: 0;
-      padding: 20px;
+      padding: 10px;
       text-align: center;
     }
 
     .lock-screen, .main-content {
-      max-width: 320px;
-      margin: 50px auto;
-      padding: 20px;
-      background: white;
+      max-width: 280px;
+      margin: 40px auto;
+      padding: 15px;
+      background: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
 
-    input[type="password"] {
-      width: 80%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-      margin-bottom: 10px;
+    input[type="tel"] {
+      width: 90%;
+      padding: 8px;
+      font-size: 18px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
     }
 
     button, .button, .copy-button {
-      padding: 10px;
-      font-size: 16px;
+      padding: 8px;
+      font-size: 14px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -41,6 +43,8 @@
     button {
       background-color: #4CAF50;
       color: white;
+      width: 80%;
+      margin-top: 5px;
     }
 
     .main-content {
@@ -49,9 +53,8 @@
 
     .button {
       display: block;
-      margin: 10px auto;
-      width: 90%;
-      max-width: 260px;
+      margin: 6px auto;
+      width: 100%;
       background-color: #2196F3;
       color: white;
       text-decoration: none;
@@ -59,52 +62,59 @@
 
     .ssid-block {
       background: #fff;
-      border-radius: 8px;
-      margin: 10px auto;
-      padding: 10px;
-      max-width: 300px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      margin: 8px auto;
+      padding: 8px;
+      font-size: 14px;
+      box-shadow: 0 0 3px rgba(0,0,0,0.05);
     }
 
     .ssid-name {
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
 
     .copy-button {
       background-color: #FF9800;
       color: white;
       margin-top: 5px;
+      width: 100%;
+    }
+
+    .locked-message {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ロック画面 -->
+  <!-- パスコード画面 -->
   <div class="lock-screen" id="lock">
-    <h2>パスコードを入力してください</h2>
-    <input type="password" id="code" placeholder="4桁の数字" />
-    <br />
-    <button onclick="checkCode()">確認</button>
+    <h3>パスコード</h3>
+    <input type="tel" inputmode="numeric" id="code" placeholder="6桁" maxlength="6" />
+    <button onclick="checkCode()">OK</button>
+    <div class="locked-message" id="lockedMsg" style="display: none;">ロックされました</div>
   </div>
 
   <!-- メイン画面 -->
   <div class="main-content" id="content">
-    <h2>📷 QRコードリンク</h2>
+    <h3>QRリンク</h3>
     <a class="button" href="https://drive.google.com/file/d/1z97gXIg1D6UCm7cnvXP0-_OFaWCxe9Yb/view" target="_blank">
-      SSID: NSD1K-6B50-a
+      NSD1K-6B50-a
     </a>
     <a class="button" href="https://drive.google.com/file/d/1FxnFR2XOXQoZVSgMUQ-ArZEoFQVh7x4R/view" target="_blank">
-      SSID: NSD1K-6B50-g
+      NSD1K-6B50-g
     </a>
     <a class="button" href="https://drive.google.com/file/d/1_0udSLp3w2A7e2YpIyMgDJ1pdqnucg8Q/view" target="_blank">
-      SSID: Doraemon-2.4GHz
+      Doraemon-2.4GHz
     </a>
     <a class="button" href="https://drive.google.com/file/d/1HMrM1IrygdGDgspK7PUlpAQR_qFfwjTo/view" target="_blank">
-      SSID: Doraemon-5GHz
+      Doraemon-5GHz
     </a>
 
-    <h2 style="margin-top: 30px;">🔐 SSID & パスワードコピー</h2>
+    <h3>SSID & パスワード</h3>
 
     <div class="ssid-block">
       <div class="ssid-name">NSD1K-6B50-a</div>
@@ -132,21 +142,33 @@
   </div>
 
   <script>
+    const correctCode = "123155"; // ← ここを好きな6桁に変更
+    let attempts = 0;
+
     function checkCode() {
       const input = document.getElementById("code").value;
-      const correct = "0374"; // ← 任意のパスコードに変更
 
-      if (input === correct) {
+      if (attempts >= 3) {
+        return; // ロック中は何もしない
+      }
+
+      if (input === correctCode) {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
       } else {
-        alert("パスコードが違います");
+        attempts++;
+        alert(`間違っています (${attempts}/3)`);
+
+        if (attempts >= 3) {
+          document.getElementById("lockedMsg").style.display = "block";
+          document.getElementById("code").disabled = true;
+        }
       }
     }
 
     function copyPassword(pwd) {
       navigator.clipboard.writeText(pwd).then(() => {
-        alert("コピーしました！");
+        alert("コピーしました");
       }).catch(() => {
         alert("コピーに失敗しました");
       });
