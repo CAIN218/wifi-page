@@ -55,6 +55,7 @@
       display: block;
       margin: 6px auto;
       width: 100%;
+      max-width: 240px;
       background-color: #2196F3;
       color: white;
       text-decoration: none;
@@ -93,7 +94,7 @@
   <!-- パスコード画面 -->
   <div class="lock-screen" id="lock">
     <h3>パスコード</h3>
-    <input type="tel" inputmode="numeric" id="code" placeholder="6桁" maxlength="6" />
+    <input type="tel" inputmode="numeric" id="code" placeholder="6桁" maxlength="6" oninput="filterInput(this)" />
     <button onclick="checkCode()">OK</button>
     <div class="locked-message" id="lockedMsg" style="display: none;">ロックされました</div>
   </div>
@@ -142,15 +143,17 @@
   </div>
 
   <script>
-    const correctCode = "123155"; // ← ここを好きな6桁に変更
+    const correctCode = "123155";
     let attempts = 0;
+
+    function filterInput(input) {
+      input.value = input.value.replace(/\D/g, '').slice(0, 6);
+    }
 
     function checkCode() {
       const input = document.getElementById("code").value;
 
-      if (attempts >= 3) {
-        return; // ロック中は何もしない
-      }
+      if (attempts >= 3) return;
 
       if (input === correctCode) {
         document.getElementById("lock").style.display = "none";
