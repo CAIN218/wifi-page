@@ -1,24 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Wi-Fi 選択</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
-    button {
-      display: block;
-      margin: 15px auto;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSID QRコードページ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .btn {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        #qrCodeContainer {
+            margin-top: 20px;
+            padding: 20px;
+        }
+        @media (max-width: 600px) {
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            #qrCodeContainer {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Wi-Fi を選んでね</h1>
-  <button onclick="location.href='https://drive.google.com/file/d/1z97gXIg1D6UCm7cnvXP0-_OFaWCxe9Yb/view?usp=sharing'">Wi-Fi A</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1FxnFR2XOXQoZVSgMUQ-ArZEoFQVh7x4R/view?usp=sharing'">Wi-Fi B</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1_0udSLp3w2A7e2YpIyMgDJ1pdqnucg8Q/view?usp=sharing'">Wi-Fi C</button>
-  <button onclick="location.href='https://drive.google.com/file/d/1HMrM1IrygdGDgspK7PUlpAQR_qFfwjTo/view?usp=sharing'">Wi-Fi D</button>
-</body>
-</html>
+
+    <h1>SSID QRコード</h1>
+    <p>ボタンをクリックすると、そのSSID
